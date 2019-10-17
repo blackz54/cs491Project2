@@ -17,10 +17,7 @@ def K_Means(X, K):
             C[index].append(list(X[i]))
         newCenters = [np.around(np.mean(C[i], axis=0), 3) for i in range(0, K)]
         if np.array_equal(centers, newCenters):
-            print("returning")
-            print(centers)
-            print(C)
-            return C
+            return np.sort(np.array(centers),0)
         centers = newCenters
 
 
@@ -42,3 +39,46 @@ def distance(x, y):
     x = np.array(x)
     y = np.array(y)
     return np.sqrt(np.sum((x - y) ** 2))
+
+
+def K_Means_better(X,K):
+	centers = []
+	commonCenters = []
+	centers_count = []
+	max_runCount = 1000
+	mode_of_centers = 0
+
+	#run K_Means max_runCount times and count centers generated
+	for i in range(0,max_runCount):
+		centers.append(tuple(K_Means(X,K)))
+
+		if centers[i] in commonCenters:
+			check = 0
+			while not centers[i] == commonCenters[check]:
+				check += 1
+			centers_count[check] += 1
+
+		else:
+			commonCenters.append(centers[i])
+			centers_count.append(1)
+	
+	mode_of_centers = Get_Ind_of_Max(centers_count)
+
+	return np.array(commonCenters[mode_of_centers])		
+
+def Get_Ind_of_Max(M):
+	maxInd = 0
+
+	for i in range(0,len(M)):
+		if M[maxInd] < M[i]:
+			maxInd = i
+
+	return maxInd
+
+
+
+
+
+
+
+
