@@ -42,10 +42,10 @@ def distance(x, y):
 
 
 def K_Means_better(X, K):
-    centers = []
-    commonCenters = []
-    centers_count = []
-    max_runCount = 1000
+	centers = []
+	commonCenters = []
+	centers_count = []
+	max_runCount = 1000
 
 	#run K_Means max_runCount times and count centers generated
 	for i in range(0,max_runCount):
