@@ -51,8 +51,7 @@ def K_Means_better(X,K):
 	#run K_Means max_runCount times and count centers generated
 	for i in range(0,max_runCount):
 		centers.append(tuple(K_Means(X,K)))
-
-		if centers[i] in commonCenters:
+		if list(centers[i]) in list(commonCenters):
 			check = 0
 			while not centers[i] == commonCenters[check]:
 				check += 1
@@ -74,11 +73,4 @@ def Get_Ind_of_Max(M):
 			maxInd = i
 
 	return maxInd
-
-
-
-
-
-
-
 
