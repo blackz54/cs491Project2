@@ -46,20 +46,24 @@ def K_Means_better(X, K):
     commonCenters = []
     centers_count = []
     max_runCount = 1000
-    # run K_Means max_runCount times and count centers generated
-    for i in range(0, max_runCount):
-        centers.append(tuple(K_Means(X, K)))
-        if list(centers[i]) in list(commonCenters):
-            check = 0
-            while not centers[i] == commonCenters[check]:
-                check += 1
-            centers_count[check] += 1
-        else:
-            commonCenters.append(centers[i])
-            centers_count.append(1)
-    mode_of_centers = Get_Ind_of_Max(centers_count)
-    return np.array(commonCenters[mode_of_centers])
 
+	#run K_Means max_runCount times and count centers generated
+	for i in range(0,max_runCount):
+		centers = list(K_Means(X,K))
+		sortedCenters = tuple(sorted(centers, key=lambda x: x[0]))
+		if list(sortedCenters) in list(commonCenters):
+			check = 0
+			while not sortedCenters == commonCenters[check]:
+				check += 1
+			centers_count[check] += 1
+
+		else:
+			commonCenters.append(sortedCenters)
+			centers_count.append(1)
+	
+	mode_of_centers = Get_Ind_of_Max(centers_count)
+
+	return np.array(commonCenters[mode_of_centers])		
 
 def Get_Ind_of_Max(M):
     maxInd = 0
