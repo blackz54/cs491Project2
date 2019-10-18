@@ -41,12 +41,11 @@ def distance(x, y):
     return np.sqrt(np.sum((x - y) ** 2))
 
 
-def K_Means_better(X,K):
-	centers = []
-	commonCenters = []
-	centers_count = []
-	max_runCount = 1000
-	mode_of_centers = 0
+def K_Means_better(X, K):
+    centers = []
+    commonCenters = []
+    centers_count = []
+    max_runCount = 1000
 
 	#run K_Means max_runCount times and count centers generated
 	for i in range(0,max_runCount):
@@ -67,11 +66,8 @@ def K_Means_better(X,K):
 	return np.array(commonCenters[mode_of_centers])		
 
 def Get_Ind_of_Max(M):
-	maxInd = 0
-
-	for i in range(0,len(M)):
-		if M[maxInd] < M[i]:
-			maxInd = i
-
-	return maxInd
-
+    maxInd = 0
+    for i in range(0, len(M)):
+        if M[maxInd] < M[i]:
+            maxInd = i
+    return maxInd
