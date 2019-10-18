@@ -15,9 +15,9 @@ def K_Means(X, K):
         for i in range(0, numSamps):
             index = find_closest_center(X[i], centers)
             C[index].append(list(X[i]))
-        newCenters = [np.around(np.mean(C[i], axis=0), 3) for i in range(0, K)]
+        newCenters = [np.around(np.mean(C[i], axis=0), 2) if len(C[i]) > 0 else 0 for i in range(0, K)]
         if np.array_equal(centers, newCenters):
-            return np.sort(np.array(centers),0)
+            return np.array(centers)
         centers = newCenters
 
 
@@ -50,15 +50,16 @@ def K_Means_better(X,K):
 
 	#run K_Means max_runCount times and count centers generated
 	for i in range(0,max_runCount):
-		centers.append(tuple(K_Means(X,K)))
-		if list(centers[i]) in list(commonCenters):
+		centers = list(K_Means(X,K))
+		sortedCenters = tuple(sorted(centers, key=lambda x: x[0]))
+		if list(sortedCenters) in list(commonCenters):
 			check = 0
-			while not centers[i] == commonCenters[check]:
+			while not sortedCenters == commonCenters[check]:
 				check += 1
 			centers_count[check] += 1
 
 		else:
-			commonCenters.append(centers[i])
+			commonCenters.append(sortedCenters)
 			centers_count.append(1)
 	
 	mode_of_centers = Get_Ind_of_Max(centers_count)
