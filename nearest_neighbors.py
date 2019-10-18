@@ -22,10 +22,7 @@ def distance(x, y):
 
 
 def KNN_predict(X_train, Y_train, X_test, Y_test, K):
-    S = []
-    for i in range(0, len(X_train)):
-        temp = [distance(X_train[i], X_test), i]
-        S.append(temp)
+    S = [[distance(X_train[i], X_test), i] for i in range(0, len(X_train))]
     S = sorted(S, key=lambda x: x[0])
     prediction = 0
     for i in range(0, K):
@@ -41,7 +38,7 @@ def choose_K(X_train, Y_train, X_val, Y_val):
     best_acc = 0
     for i in range(0, len(X_train)):
         acc = KNN_test(X_train, Y_train, X_val, Y_val, i)
-        if (acc > best_acc):
+        if acc > best_acc:
             best_acc = acc
             best_K = i
     print(best_K)
