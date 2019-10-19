@@ -15,7 +15,7 @@ def K_Means(X, K):
         for i in range(0, numSamps):
             index = find_closest_center(X[i], centers)
             C[index].append(list(X[i]))
-        newCenters = [np.around(np.mean(C[i], axis=0), 2) if len(C[i]) > 0 else 0 for i in range(0, K)]
+        newCenters = [around(np.mean(C[i], axis=0), 2) if len(C[i]) > 0 else 0 for i in range(0, K)]
         #newCenters = [around(mean(C[i]), 2) if len(C[i]) > 0 else np.array([0]*len(X[0])) for i in range(0, K)]
         if array_equal(centers, newCenters):
             return np.array(centers)
