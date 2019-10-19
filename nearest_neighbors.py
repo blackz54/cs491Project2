@@ -2,9 +2,7 @@ import numpy as np
 
 
 def KNN_test(X_train, Y_train, X_test, Y_test, K):
-    predict = []
-    for i in range(0, len(X_test)):
-        predict.append(KNN_predict(X_train, Y_train, X_test[i], Y_test[i], K))
+    predict = [KNN_predict(X_train, Y_train, X_test[i], Y_test[i], K) for i in range(len(X_test))]
     Y_test = np.array(Y_test).flatten()
     correct = 0
     total = 0
