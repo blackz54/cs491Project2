@@ -35,7 +35,7 @@ def mean(C):
     return groups
 
 def around(X, d):
-    return [round(float(X[i]), 2) for i in range(len(X))]
+    return [round(float(X[i]), d) for i in range(len(X))]
 
 
 def array_equal(X, Y):
