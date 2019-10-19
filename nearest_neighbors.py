@@ -16,7 +16,13 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
     return acc
 
 def distance(x, y):
-    return np.sqrt(np.sum((x - y) ** 2))
+    x = np.array(x)
+    y = np.array(y)
+    value = 0
+    for i in range(0, len(x)):
+        value += (x[i] - y[i])**2
+    return value ** 0.5
+
 
 
 def KNN_predict(X_train, Y_train, X_test, Y_test, K):
