@@ -2,9 +2,7 @@ import numpy as np
 
 
 def KNN_test(X_train, Y_train, X_test, Y_test, K):
-    predict = []
-    for i in range(0, len(X_test)):
-        predict.append(KNN_predict(X_train, Y_train, X_test[i], Y_test[i], K))
+    predict = [KNN_predict(X_train, Y_train, X_test[i], Y_test[i], K) for i in range(len(X_test))]
     Y_test = np.array(Y_test).flatten()
     correct = 0
     total = 0
@@ -18,7 +16,13 @@ def KNN_test(X_train, Y_train, X_test, Y_test, K):
     return acc
 
 def distance(x, y):
-    return np.sqrt(np.sum((x - y) ** 2))
+    x = np.array(x)
+    y = np.array(y)
+    value = 0
+    for i in range(0, len(x)):
+        value += (x[i] - y[i])**2
+    return value ** 0.5
+
 
 
 def KNN_predict(X_train, Y_train, X_test, Y_test, K):
